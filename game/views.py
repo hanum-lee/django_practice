@@ -5,5 +5,8 @@ from django.template import loader
 # Create your views here.
 
 def index(request):
-    
+    #return HttpResponse("Here is the game index")
     return render(request,'game/index.html')
+    #return render(request,'polls/gametest.html')
+def testing(request):
+    return render(request,'test.html')
