@@ -9,4 +9,4 @@ def index(request):
     return render(request,'game/index.html')
     #return render(request,'polls/gametest.html')
 def testing(request):
-    return render(request,'test.html')
+    return render(request,'game/test.html')
