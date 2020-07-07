@@ -1,3 +1,18 @@
+let data_frame = {
+    "trial_num": null,
+    "lane_start":null,
+    "stim":null,
+    "stim_onset":null,
+    "inter_trial":null,
+    "loop_speed":null,
+    "lane_change_onset":null,
+    "sled_status":null,
+    "grab_time":null,
+    "accuracy":null,
+    "switch_timer":null,
+}
+
+
 function getRandomColor() {
 				
     var letters = "0123456789ABCDEF".split('');
@@ -62,6 +77,8 @@ document.getElementById("box").onclick=function() {
 }
 
 makeBox(); 
+
+
 
 
 
