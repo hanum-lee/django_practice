@@ -13,8 +13,9 @@ let data_frame = {
 }
 
 
+let reactiontimes = [];
 function getRandomColor() {
-				
+        
     var letters = "0123456789ABCDEF".split('');
     var color = "#";
     for (var i = 0; i < 6; i++) {
@@ -24,13 +25,13 @@ function getRandomColor() {
 
 
 } // ends getRandomColor Function
-
+    
 
 var clickedTime; var createdTime; var reactionTime; 
-
+    
 function makeBox() {
-        var time=Math.random();
-        time=time*3000;
+    var time=Math.random();
+    time=time*3000;
     
     setTimeout(function() {
     
@@ -60,7 +61,7 @@ function makeBox() {
     }, time); 
 
 }
-
+    
 document.getElementById("box").onclick=function() {
 
     clickedTime=Date.now();
@@ -70,17 +71,57 @@ document.getElementById("box").onclick=function() {
     document.getElementById("printReactionTime").innerHTML="Your Reaction Time is: " + reactionTime + "seconds";
     
     this.style.display="none";
-    
+    console.log("Testing");
     makeBox();
     
     
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+    
+document.addEventListener('keydown',function(event){
+    if(event.key == "ArrowLeft" || event.key == "ArrowRight"){
+    clickedTime=Date.now();
+    
+    reactionTime=(clickedTime-createdTime)/1000;
+    
+    document.getElementById("printReactionTime").innerHTML="Your Reaction Time is: " + reactionTime + "seconds";
+    
+    document.getElementById("box").style.display="none";
+    reactiontimes.push(reactionTime);
+    makeBox();
+    console.log("Testing2");
+    }
+    if(event.key == "Enter"){
+        console.log("Testing3");
+        document.getElementById("arrayofTime").innerHTML = "List: " + reactiontimes;
+        document.getElementById("jsonTest").innerHTML = "JSON: " + data_frame["accuracy"]; 
+        $.ajax({
+            url:'event/',
+            type: 'POST',
+            contentType: 'application/json; charset=uft-8',
+            data: JSON.stringify(data_frame),
+            dataType: 'text',
+            success: function(result){
+                alert(result.Result);
+            }
+        })
+    }
+});
+
 makeBox(); 
-
-
-
-
-
-
-

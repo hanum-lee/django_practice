@@ -13,8 +13,9 @@ let data_frame = {
 }
 
 
+let reactiontimes = [];
 function getRandomColor() {
-				
+        
     var letters = "0123456789ABCDEF".split('');
     var color = "#";
     for (var i = 0; i < 6; i++) {
@@ -24,13 +25,13 @@ function getRandomColor() {
 
 
 } // ends getRandomColor Function
-
+    
 
 var clickedTime; var createdTime; var reactionTime; 
-
+    
 function makeBox() {
-        var time=Math.random();
-        time=time*3000;
+    var time=Math.random();
+    time=time*3000;
     
     setTimeout(function() {
     
@@ -60,7 +61,7 @@ function makeBox() {
     }, time); 
 
 }
-
+    
 document.getElementById("box").onclick=function() {
 
     clickedTime=Date.now();
@@ -70,17 +71,30 @@ document.getElementById("box").onclick=function() {
     document.getElementById("printReactionTime").innerHTML="Your Reaction Time is: " + reactionTime + "seconds";
     
     this.style.display="none";
-    
+    console.log("Testing");
     makeBox();
     
     
 }
+    
+document.addEventListener('keydown',function(event){
+    if(event.key == "ArrowLeft" || event.key == "ArrowRight"){
+    clickedTime=Date.now();
+    
+    reactionTime=(clickedTime-createdTime)/1000;
+    
+    document.getElementById("printReactionTime").innerHTML="Your Reaction Time is: " + reactionTime + "seconds";
+    
+    document.getElementById("box").style.display="none";
+    reactiontimes.push(reactionTime);
+    makeBox();
+    console.log("Testing2");
+    }
+    if(event.key == "Enter"){
+        console.log("Testing3");
+        document.getElementById("arrayofTime").innerHTML = "List: " + reactiontimes;
+        document.getElementById("jsonTest").innerHTML = "JSON: " + data_frame["accuracy"]; 
+    }
+});
 
 makeBox(); 
-
-
-
-
-
-
-

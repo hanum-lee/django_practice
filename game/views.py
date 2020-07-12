@@ -10,3 +10,8 @@ def index(request):
     #return render(request,'polls/gametest.html')
 def testing(request):
     return render(request,'game/test.html')
+def save_events_json(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            print ('Raw Data: "%s"' % request.body)
+    return HttpResponse("OK")
