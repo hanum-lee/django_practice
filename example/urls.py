@@ -5,5 +5,6 @@ from . import views
 app_name = 'example'
 urlpatterns = [
     #url(r'^$',user_list, name= "user_list"),
-    path('',views.index,name='index')
+    path('',views.index,name='index'),
+    path('<str:room_name>/',views.room,name='room')
 ]

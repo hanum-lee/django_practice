@@ -7,3 +7,8 @@ def user_list(request):
 
 def index(request):
     return render(request,'example/index.html')
+
+def room(request,room_name):
+    return render(request, 'example/room.html',{
+        'room_name':room_name
+    })
