@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/',include('polls.urls')),
     path('game/',include('game.urls')),
-    path('frontend/',include('frontend.urls'))
+    path('socket/',include('example.urls'))
 ]
